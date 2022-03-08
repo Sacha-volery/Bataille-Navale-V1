@@ -8,24 +8,26 @@
 
 int main() {
     SetConsoleOutputCP(65001);
-    int axeX, axeY, regle;
+    int nbbateau;
+    char RepCol[] = "A";
+    int colonne, axeY, regle;
     int choix,ligne;
     int BNtableau[10][10] = {
+            {5, 5, 0, 0, 0, 0, 0,  0,  0,  0},
             {0, 0, 0, 0, 0, 0, 0,  0,  0,  0},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  0, 0},
-            {0, 0, 0, 0, 0, 0, 10, 0,  0,  0},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  0},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  105},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  105},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  0},
-            {0, 0, 0, 0, 0, 0, 0,  0,  10, 0},
-            {0, 0, 0, 0, 0, 0, 0,  0,  0,  0},
-            {0, 0, 0, 0, 0, 0, 13, 13, 3,  0},
+            {0, 0, 0, 0, 1, 0, 0,  3,  0,  0},
+            {0, 0, 0, 0, 1, 0, 0,  3,  0,  0},
+            {0, 4, 0, 0, 1, 0, 0,  3,  0,  0},
+            {0, 4, 0, 0, 0, 0, 0,  3,  0,  0},
+            {0, 4, 0, 0, 0, 0, 0,  0,  0,  0},
+            {0, 4, 0, 0, 0, 2, 2,  0,  0,  0},
+            {0, 4, 0, 0, 0, 0, 0,  0,  0,  0},
+            {0, 0, 0, 0, 0, 0, 0,  0, 0,   0},
     };
 
     printf("    | A | B | C | D | E | F | G | H | I | J |");
     for (int ligne = 0; ligne <= 9; ligne++) {
-        //printf("\n%2       d  |", ligne + 1);
+
 
 
         printf("\n");
@@ -42,25 +44,54 @@ int main() {
     }
     case 2 : {
         printf("voici le mode jouer tous seule :\n");
-    }
-    }
 
-    printf("\n");
-        printf(" | A | B | C | D | E | F | G | H | I | J |"); for (int ligne = 0; ligne <= 10; ligne++) {
-        printf("\n");
-        printf("%2d",ligne +1);
-            for (int colonnes = 0; colonnes <= 10; colonnes++) {
-                if (BNtableau[ligne][colonnes] == 0) { printf(" |"); }
-                if ((BNtableau[ligne][colonnes] >= 1) && (BNtableau[ligne][colonnes] <= 5)) { printf(" |"); }
-                if (BNtableau[ligne][colonnes] == 10) { printf(" x |"); }
-                if ((BNtableau[ligne][colonnes] >= 11) && (BNtableau[ligne][colonnes] <= 15)) { printf(" I |"); }
-                if ((BNtableau[ligne][colonnes] >= 101) && (BNtableau[ligne][colonnes] <= 105)) { printf(" $ |"); }
+        do {
+            printf("\nColonne ?(A-J)");
+            scanf("%s", &RepCol);
+            RepCol[0] = RepCol[0] & (0xFF - 0x20);
+            colonne = RepCol[0] - 65;
+            printf("\nLigne ?(1-10)");
+            scanf("%d", &ligne);
+            ligne -= 1;
+            //Mise à jour tableau
+            if (BNtableau[ligne][colonne] < 10)
+                BNtableau[ligne][colonne] += 10;
+
+            //Affichage du tableau
+            printf("\n    A | B | C | D | E | F | G | H | I | J |");
+            for (int ligne = 0; ligne < 10; ligne++) {
+                printf("\n");
+                printf("%2d", ligne + 1);
+                for (int colonne = 0; colonne < 10; colonne++) {
+                    if (BNtableau[ligne][colonne] < 10) {
+                        printf(" [ ]");
+                    }
+                    if (BNtableau[ligne][colonne] == 10) {
+                        printf(" [0]");
+                    }
+                    if (BNtableau[ligne][colonne] > 10) {
+                        printf(" [x]");
+                    }
+                    if (BNtableau[ligne][colonne] > 20) {
+                        printf(" [$]");
+                    }
+                }
             }
-            printf("\n"); }
-
-
+            //Quand c'est fini la bataille s'arrête
+            nbbateau = 0;
+            for (int ligne = 0; ligne < 10; ligne++) {
+                for (int colonne = 0; colonne < 10; colonne++) {
+                    if ((BNtableau[ligne][colonne] >= 1) && (BNtableau[ligne][colonne] <= 5)) {
+                        nbbateau++;
+                    }
+                }
+            }
+            printf("\n\nil vous reste %d case(s)", nbbateau);
+        } while (nbbateau > 5);
+        return 0;
     }
-
+    }
+}
 
 
 
