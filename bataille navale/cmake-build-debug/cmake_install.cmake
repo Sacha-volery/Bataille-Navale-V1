@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/voler/OneDrive/Documents/GitHub/Bataille-Navale-V1
+# Install script for directory: C:/Users/voler/CLionProjects/bataille navale
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/voler/OneDrive/Documents/GitHub/Bataille-Navale-V1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/voler/CLionProjects/bataille navale/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
